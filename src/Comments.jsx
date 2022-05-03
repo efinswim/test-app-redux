@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SingleComment from './SingleComment';
-import { commentCreate } from './redux/actions';
+import { commentCreate, commentsLoad } from './redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import uniqid from 'uniqid';
 
@@ -11,6 +11,10 @@ const Comments = (props) => {
     const { commentsReducer } = state;
     return commentsReducer.comments;
   })
+
+  useEffect(() => {
+    dispatch(commentsLoad());
+  }, [])
 
   const dispatch = useDispatch();
 
